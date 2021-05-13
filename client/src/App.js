@@ -1,10 +1,10 @@
 import "./App.css";
 import { Route, Redirect } from "react-router-dom";
-import Projects from "./components/Projects";
+import Equipments from "./components/Equipments";
 import React from "react";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import ProjectDetails from "./components/ProjectDetails";
+import EquipmentDetails from "./components/EquipmentDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 
@@ -36,13 +36,13 @@ class App extends React.Component {
         /> */}
 
         <ProtectedRoute
-          path="/projects"
+          path="/equipments"
           user={this.state.user}
-          component={Projects}
+          component={Equipments}
           redirectPath="/login"
         />
 
-        <Route exact path="/projects/:id" component={ProjectDetails} />
+        <Route exact path="/equipments/:id" component={EquipmentDetails} />
 
         <Route
           exact

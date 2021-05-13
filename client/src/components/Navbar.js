@@ -26,22 +26,29 @@ export default function Navbar(props) {
   };
 
   return (
-    <MDBNavbar expand="lg" light bgColor="light">
+    <MDBNavbar expand="lg" bgColor="info">
       <MDBNavbarBrand href="#">Baby 3.0</MDBNavbarBrand>
-      <MDBNavbarLink href="/">Home</MDBNavbarLink>
-      
+      <MDBNavbarLink href="/" class="text-white">
+        Home
+      </MDBNavbarLink>
 
       {props.user ? (
         <>
-          <MDBNavbarLink href="/about">About</MDBNavbarLink>
-          <MDBNavbarLink href="/" onClick={() => handleLogout()}>
+          <Link to="/equipments" class="text-white">
+            Add baby's equipment
+          </Link>
+          <Link to="/" onClick={() => handleLogout()}>
             Logout
-          </MDBNavbarLink>
+          </Link>
         </>
       ) : (
         <>
-          <MDBNavbarLink href="/signup">Signup</MDBNavbarLink>
-          <MDBNavbarLink href="/login">Login</MDBNavbarLink>
+          <Link to="/signup" class="text-white">
+            Signup
+          </Link>
+          <Link to="/login" class="text-white">
+            Login
+          </Link>
         </>
       )}
       <form class="d-flex input-group w-auto">

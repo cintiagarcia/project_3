@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 
-export default class EditProject extends Component {
+export default class EditEquipment extends Component {
   render() {
     return (
       <div>
-        <h1>Edit this Project</h1>
+        <h1>Edit this Equipment</h1>
         <form onSubmit={this.props.handleSubmit}>
-          <label htmlFor="title">Title: </label>
+          <label htmlFor="name">Name: </label>
           <input
             type="text"
-            id="title"
-            name="title"
-            value={this.props.title}
+            id="name"
+            name="name"
+            value={this.props.name}
             onChange={this.props.handleChange}
           />
           <label htmlFor="description">Description: </label>
@@ -22,7 +22,7 @@ export default class EditProject extends Component {
             value={this.props.description}
             onChange={this.props.handleChange}
           />
-          <button type="submit">Update this Project</button>
+          <button type="submit">Update this Equipment</button>
         </form>
       </div>
     )

@@ -90,8 +90,8 @@ app.use(passport.session());
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controled from the routes/index.js
 
-const projects = require("./routes/projects");
-app.use("/api/projects", projects);
+const equipments = require("./routes/equipments");
+app.use("/api/equipments", equipments);
 
 const auth = require("./routes/auth");
 app.use("/api/auth", auth);
