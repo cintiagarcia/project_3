@@ -5,6 +5,7 @@ import EditEquipment from "./EditEquipment";
 export default class EquipmentDetails extends Component {
   state = {
     equipment: null,
+    imageUrl: " ",
     name: "",
     description: "",
     price: 0,
@@ -32,7 +33,7 @@ export default class EquipmentDetails extends Component {
         console.log(response.data);
         this.setState({
           equipment: response.data,
-
+          imageUrl: response.data.imageUrl,
           name: response.data.name,
           description: response.data.description,
           price: response.data.price,
@@ -71,10 +72,11 @@ export default class EquipmentDetails extends Component {
   };
 
   handleSubmit = (e) => {
-    const { name, description, price, deposit } = this.state;
+    const { imageUrl, name, description, price, deposit } = this.state;
     e.preventDefault();
     axios
       .put(`/api/equipments/${this.state.equipment._id}`, {
+        imageUrl,
         name,
         description,
         price,
@@ -83,7 +85,7 @@ export default class EquipmentDetails extends Component {
       .then((response) => {
         this.setState({
           equipment: response.data,
-
+          imageUrl: response.data.imageUrl,
           name: response.data.name,
           description: response.data.description,
           price: response.data.price,
@@ -104,6 +106,7 @@ export default class EquipmentDetails extends Component {
     return (
       <>
         <h1>Name: {this.state.equipment.name}</h1>
+        <img src= "{imageUrl}" alt="{title}"></img>
         <p>Description: {this.state.equipment.description}</p>
         <p>Price: {this.state.equipment.price}</p>
         <p>Deposit: {this.state.equipment.deposit}</p>

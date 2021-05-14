@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default class AddEquipment extends Component {
   state = {
+    fd: undefined,
     name: " ",
     description: " ",
     price: 0,
@@ -12,53 +13,64 @@ export default class AddEquipment extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {  name, description, price, deposit } = this.state;
-    axios
-      .post("/api/equipments", {
-        
-        name,
-        description,
-        price,
-        deposit,
-      })
-      .then((response) => {
-        console.log(response.data);
-        this.setState({
-          
-          name: " ",
-          description: " ",
-          price: 0,
-          deposit: 0,
+    const { fd, name, description, price, deposit } = this.state;
+    console.log("LOOL");
+    console.log(fd);
+    let config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    axios.post("/api/equipments/upload", fd, config).then((response) => {
+      const { img } = response;
+
+      axios
+        .post("/api/equipments", {
+          name,
+          img,
+          description,
+          price,
+          deposit,
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.setState({
+            name: " ",
+            description: " ",
+            price: 0,
+            deposit: 0,
+          });
+          // update the list of equipments -> we want to trigger getData() in the Equipments
+          // component
+          this.props.getData();
         });
-        // update the list of equipments -> we want to trigger getData() in the Equipments
-        // component
-        this.props.getData();
-      });
+    });
   };
 
   handleChange = (e) => {
     const { name, value } = e.target;
-    // if (value.length < 8) {
-    //   this.setState({
-    //     error: 'String is not long enough'
-    //   })
-    // } else {
     this.setState({
       [name]: value,
+    });
+  };
+
+  handleImg = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    console.log(`FILE: ${file}`);
+
+    const fd = new FormData();
+    fd.append("imageUrl", file);
+    this.setState({
+      fd: fd,
     });
   };
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        {/* <label htmlFor="title">Photo: </label>
-        <input
-          type="text"
-          name="photo"
-          id="photo"
-          value={this.state.imageUrl}
-          onChange={this.handleChange}
-        /> */}
+        <label htmlFor="title">Photo: </label>
+        <input type="file" onChange={this.handleImg} />
 
         <label htmlFor="name">Name: </label>
         <input
