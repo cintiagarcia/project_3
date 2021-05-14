@@ -37,6 +37,9 @@ export default function Navbar(props) {
           <Link to="/equipments" class="text-white">
             Add baby's equipment
           </Link>
+          <Link to="/googleMap" class="text-white">
+            Map 
+          </Link>
           <Link to="/" onClick={() => handleLogout()}>
             Logout
           </Link>

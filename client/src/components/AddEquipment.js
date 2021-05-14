@@ -22,7 +22,9 @@ export default class AddEquipment extends Component {
       },
     };
     axios.post("/api/equipments/upload", fd, config).then((response) => {
-      const { img } = response;
+      const { img } = response.data;
+      console.log("==============");
+      console.log(response);
 
       axios
         .post("/api/equipments", {
@@ -33,7 +35,7 @@ export default class AddEquipment extends Component {
           deposit,
         })
         .then((response) => {
-          console.log(response.data);
+          console.log(response);
           this.setState({
             name: " ",
             description: " ",

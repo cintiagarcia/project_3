@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { Component } from "react";
 import EditEquipment from "./EditEquipment";
+import GoogleMapReact from "google-map-react";
 
 export default class EquipmentDetails extends Component {
   state = {
     equipment: null,
-    imageUrl: " ",
+    imageurl: undefined,
     name: "",
     description: "",
     price: 0,
@@ -30,10 +31,11 @@ export default class EquipmentDetails extends Component {
     axios
       .get(`/api/equipments/${this.props.match.params.id}`)
       .then((response) => {
-        console.log(response.data);
+        console.log("$$$$$$$ aqui!");
+        console.log(response.data.imageurl);
         this.setState({
           equipment: response.data,
-          imageUrl: response.data.imageUrl,
+          imageurl: response.data.imageurl,
           name: response.data.name,
           description: response.data.description,
           price: response.data.price,
@@ -72,11 +74,11 @@ export default class EquipmentDetails extends Component {
   };
 
   handleSubmit = (e) => {
-    const { imageUrl, name, description, price, deposit } = this.state;
+    const { imageurl, name, description, price, deposit } = this.state;
     e.preventDefault();
     axios
       .put(`/api/equipments/${this.state.equipment._id}`, {
-        imageUrl,
+        imageurl,
         name,
         description,
         price,
@@ -85,7 +87,7 @@ export default class EquipmentDetails extends Component {
       .then((response) => {
         this.setState({
           equipment: response.data,
-          imageUrl: response.data.imageUrl,
+          imageurl: response.data.imageurl,
           name: response.data.name,
           description: response.data.description,
           price: response.data.price,
@@ -106,7 +108,7 @@ export default class EquipmentDetails extends Component {
     return (
       <>
         <h1>Name: {this.state.equipment.name}</h1>
-        <img src= "{imageUrl}" alt="{title}"></img>
+        <img src={this.state.imageurl} width="200px"></img>
         <p>Description: {this.state.equipment.description}</p>
         <p>Price: {this.state.equipment.price}</p>
         <p>Deposit: {this.state.equipment.deposit}</p>
@@ -119,6 +121,22 @@ export default class EquipmentDetails extends Component {
             handleSubmit={this.handleSubmit}
           />
         )}
+        <div style={{ height: "100vh", width: "100%" }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: process.env.GOOGLE_MAP }}
+            defaultCenter={{
+      lat: 59.95,
+      lng: 30.33
+    }}
+            defaultZoom={11}
+          >
+            {/* <AnyReactComponent
+              lat={59.955413}
+              lng={30.337844}
+              text="My Marker"
+            /> */}
+          </GoogleMapReact>
+        </div>
       </>
     );
   }

@@ -41,8 +41,9 @@ class App extends React.Component {
           component={Equipments}
           redirectPath="/login"
         />
-
         <Route exact path="/equipments/:id" component={EquipmentDetails} />
+
+
 
         <Route
           exact

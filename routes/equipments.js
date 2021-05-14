@@ -26,7 +26,8 @@ router.post("/", (req, res, next) => {
 
 router.post("/upload", uploader.single("imageUrl"), (req, res, next) => {
    console.log(`>>>>> file is: , ${req.file}`)
-
+   console.log(req.file)
+  
   if (!req.file) {
     next(new Error("No file uploaded!"));
     return;
