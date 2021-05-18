@@ -7,6 +7,12 @@ const userSchema = new Schema({
     //unique: true -> Ideally, should be unique, but its up to you
   },
   password: String,
+  email: String,
+  street: String,
+  number: Number,
+  city: String,
+  postalCode: Number,
+  country: String,
 });
 
 const User = model("User", userSchema);

@@ -26,7 +26,7 @@ export default function Navbar(props) {
   };
 
   return (
-    <MDBNavbar expand="lg" bgColor="info">
+    <MDBNavbar expand="lg" className="navbar">
       <MDBNavbarBrand href="#">Baby 3.0</MDBNavbarBrand>
       <MDBNavbarLink href="/" class="text-white">
         Home
@@ -38,7 +38,7 @@ export default function Navbar(props) {
             Add baby's equipment
           </Link>
           <Link to="/googleMap" class="text-white">
-            Map 
+            Map
           </Link>
           <Link to="/" onClick={() => handleLogout()}>
             Logout

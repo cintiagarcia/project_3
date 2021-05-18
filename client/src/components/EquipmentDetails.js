@@ -3,6 +3,12 @@ import React, { Component } from "react";
 import EditEquipment from "./EditEquipment";
 import GoogleMapReact from "google-map-react";
 
+import Geocode from "react-geocode";
+
+
+
+const AnyReactComponent = ({ text }) => <div backgroundColor= "white">{text}</div>;
+
 export default class EquipmentDetails extends Component {
   state = {
     equipment: null,
@@ -11,11 +17,51 @@ export default class EquipmentDetails extends Component {
     description: "",
     price: 0,
     deposit: 0,
+    email: "",
+    street: "",
+    number: Number,
+    city: "",
+    postalCode: Number,
+    country: "",
     error: null,
     editForm: false,
+    center: {
+      lat: 52.5186,
+      lng: 13.4081,
+    },
+    zoom: 11,
     // this is the flag
     // dataRequested: false
   };
+
+  addressConversion = () => {
+    const address =
+      this.state.street +
+      this.state.number +
+      this.state.city +
+      this.state.postalCode +
+      this.state.country;
+    Geocode.fromAddress(address).then(
+      (response) => {
+        const { lat, lng } = response.results[0].geometry.location;
+        console.log(">>>>>Conversion:");
+        console.log(lat, lng);
+        this.setState({
+          center: {
+            lat: lat,
+            lng: lng,
+          },
+        });
+      },
+      (error) => {
+        console.log(">>>>>BANANA:");
+
+        console.error(error);
+      }
+    );
+  };
+
+  
 
   toggleEditForm = () => {
     this.setState((state) => ({
@@ -32,7 +78,7 @@ export default class EquipmentDetails extends Component {
       .get(`/api/equipments/${this.props.match.params.id}`)
       .then((response) => {
         console.log("$$$$$$$ aqui!");
-        console.log(response.data.imageurl);
+        console.log(response.data.lat);
         this.setState({
           equipment: response.data,
           imageurl: response.data.imageurl,
@@ -40,6 +86,7 @@ export default class EquipmentDetails extends Component {
           description: response.data.description,
           price: response.data.price,
           deposit: response.data.deposit,
+
           // this unsets the flag when the data is available
           // dataRequested: false
         });
@@ -92,6 +139,10 @@ export default class EquipmentDetails extends Component {
           description: response.data.description,
           price: response.data.price,
           deposit: response.data.deposit,
+          center: {
+            lat: response.data.lat,
+            lng: response.data.lng,
+          },
           editForm: false,
         });
       })
@@ -103,6 +154,11 @@ export default class EquipmentDetails extends Component {
   }
 
   render() {
+    {
+      this.addressConversion();
+    }  
+    console.log("Coordenadas:");
+    console.log(this.state.center);
     if (this.state.error) return <h2>{this.state.error}</h2>;
     if (!this.state.equipment) return <></>;
     return (
@@ -121,20 +177,13 @@ export default class EquipmentDetails extends Component {
             handleSubmit={this.handleSubmit}
           />
         )}
-        <div style={{ height: "100vh", width: "100%" }}>
+        <div style={{ height: "50vh", width: "50%" }}>
           <GoogleMapReact
-            bootstrapURLKeys={{ key: process.env.GOOGLE_MAP }}
-            defaultCenter={{
-      lat: 59.95,
-      lng: 30.33
-    }}
-            defaultZoom={11}
+            bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS }}
+            defaultCenter={this.state.center}
+            defaultZoom={this.state.zoom}
           >
-            {/* <AnyReactComponent
-              lat={59.955413}
-              lng={30.337844}
-              text="My Marker"
-            /> */}
+            <AnyReactComponent lat={52.5186} lng={13.4081} text="My Marker" />
           </GoogleMapReact>
         </div>
       </>

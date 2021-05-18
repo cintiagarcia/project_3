@@ -6,8 +6,17 @@ const { uploader, cloudinary } = require("../config/cloudinary");
 
 router.post('/signup', (req, res, next) => {
   // get username and password
-  const { username, password } = req.body;
-  console.log("step2", username, password);
+  const {
+    username,
+    password,
+    email,
+    street,
+    number,
+    city,
+    postalCode,
+    country,
+  } = req.body;
+  console.log("step2", username, password, email, street, number, city, postalCode, country);
   // is the password at least 8 chars
   if (password.length < 8) {
     // if not we show the signup form again with a message
@@ -30,23 +39,34 @@ router.post('/signup', (req, res, next) => {
         const hash = bcrypt.hashSync(password, salt);
         console.log(hash);
         // create the user in the database
-        User.create({ username: username, password: hash })
-          .then(createdUser => {
+        User.create({
+          username: username,
+          password: hash,
+          email: email,
+          street: street,
+          number: number,
+          city: city,
+          postalCode: postalCode,
+          country: country,
+        })
+          .then((createdUser) => {
             console.log(createdUser);
             // log the user in immediately
             // req.session.user = createdUser; -> this is the 'node-basic'auth-way'
             // this is the passport login
-            req.login(createdUser, err => {
+            req.login(createdUser, (err) => {
               if (err) {
-                return res.status(500).json({ message: 'Error while attempting to login' })
+                return res
+                  .status(500)
+                  .json({ message: "Error while attempting to login" });
               } else {
                 return res.status(200).json(createdUser);
               }
-            })
+            });
           })
-          .catch(err => {
+          .catch((err) => {
             res.json(err);
-          })
+          });
       }
     })
 });
