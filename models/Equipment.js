@@ -7,6 +7,10 @@ const equipmentSchema = new Schema({
   description: String,
   price: Number,
   deposit: Number,
+  email: String,
+  user: String,
+  address: String,
+  userId: String,
 });
 
 const Equipment = mongoose.model("Equipment", equipmentSchema);

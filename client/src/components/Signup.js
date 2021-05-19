@@ -103,7 +103,7 @@ export default class Signup extends Component {
           <div className="card-body px-lg-5 pt-0">
             <form
               onSubmit={this.handleSubmit}
-              className="text-center border border-light p-5"
+              className="text-center border border-light p-4"
             >
               <div className="form-group">
                 {/* <label htmlFor="username"></label> */}
@@ -204,7 +204,7 @@ export default class Signup extends Component {
                 Sign Up
               </button>
               <p className="forgot-password text-right">
-                Already registered <a href="#"> log in?</a>
+                Already registered <a href="/login"> log in?</a>
               </p>
               {this.state.message && <h3>{this.state.message}</h3>}
             </form>

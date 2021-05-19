@@ -3,7 +3,17 @@ const Equipment = require("../models/Equipment.js");
 const { uploader, cloudinary } = require("../config/cloudinary");
 
 router.post("/", (req, res, next) => {
-  const { name, img, description, price, deposit } = req.body;
+  const {
+    name,
+    img,
+    description,
+    price,
+    deposit,
+    email,
+    user,
+    address,
+    userId,
+  } = req.body;
   // var imgPath = getSafe(() => req.file.path, "");
   console.log(`>>>>>${img}`);
   Equipment.create({
@@ -12,6 +22,10 @@ router.post("/", (req, res, next) => {
     description,
     price,
     deposit,
+    email,
+    user,
+    address,
+    userId,
   })
     .then((equipment) => {
       console.log("all good");
@@ -64,18 +78,38 @@ router.get("/:id", (req, res, next) => {
 });
 
 router.put("/:id", (req, res, next) => {
-  const { imageUrl, name, description, price, deposit } = req.body;
+  const {
+    imageUrl,
+    name,
+    description,
+    price,
+    deposit,
+    email,
+    user,
+    address,
+    userId,
+  } = req.body;
   console.log("router.put", id);
   Equipment.findByIdAndUpdate(
     req.params.id,
-    { imageUrl, name, description, price, deposit },
+    {
+      imageUrl,
+      name,
+      description,
+      price,
+      deposit,
+      email,
+      user,
+      address,
+      userId,
+    },
     // if the return value of the mongoose should be the updated document you need to add this
     { new: true }
   )
     .then((equipment) => {
       res.status(200).json(equipment);
     })
-    .catch((err) => { 
+    .catch((err) => {
       console.log(err);
       res.json(err);
     });

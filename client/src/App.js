@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import EquipmentDetails from "./components/EquipmentDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Rent from "./components/Rent";
 
 class App extends React.Component {
   state = {
@@ -40,10 +42,10 @@ class App extends React.Component {
           user={this.state.user}
           component={Equipments}
           redirectPath="/login"
+          render={(props) => <Equipments user={this.state.user} />}
         />
+
         <Route exact path="/equipments/:id" component={EquipmentDetails} />
-
-
 
         <Route
           exact
@@ -63,6 +65,16 @@ class App extends React.Component {
           exact
           path="/login"
           render={(props) => <Login setUser={this.setUser} {...props} />}
+        />
+        <Route
+          exact
+          path="/"
+          render={(props) => <Home setUser={this.setUser} {...props} />}
+        />
+        <Route
+          exact
+          path="/rent"
+          render={(props) => <Rent setUser={this.setUser} {...props} />}
         />
       </div>
     );

@@ -1,52 +1,57 @@
-/* .App {
-  text-align: center;
+
+
+.fit-image {
+  object-fit: fit;
+  /* only if you want fixed height */
 }
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-} */
-
-/* nav {
-  background: rgb(221, 244, 211);
-  padding: 10px 40px 10px 70px;
-  border: 1px solid #000;
-  border-left: none;
-  border-right: none;
-  justify-content: space-between;
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-} */
-
 .navbar{
   justify-content: space-between;
   background: linear-gradient(to right, #7deaa8, #028236);
   padding: 16px 32px;
+}
+.home {
+  background-image: url("/images/barco.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 100vh;
+  display: flex;
+}
+.information{
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+  width: 40vw;
+  margin-left: 40px;
+}
+.Homebuttons a {
+  color: white;
+  text-decoration: none;
+  /* justify-items: center; */
+  background-color: #7deaa8;
+  padding: 10px 30px;
+  margin: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+.Homebuttons{
+  margin-top: 40px;
+  display: flex;
 }
 
 a {
   color: #028236;
 }
 
+.logo{
+  margin-top:120px;
+  display: flex;
+  
+}
+
 .login{
-  background-image: url("/images/arcoiris.jpeg");
+  background-image: url("/images/girl.jpeg");
+  background-repeat: no-repeat;
+  background-size:100%;
   height: 100vh;
 }
 
@@ -81,5 +86,51 @@ a {
 }
 
 
+/*search box css start here*/
+.search-sec {
+  padding: 2rem;
+}
 
+.search-slt {
+  display: block;
+  width: 100%;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #55595c;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  height: calc(3rem + 2px) !important;
+  border-radius: 0;
+}
+
+.wrn-btn {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: capitalize;
+  height: calc(3rem + 2px) !important;
+  border-radius: 0;
+}
+
+@media (min-width: 992px) {
+  .search-sec {
+    position: relative;
+    top: -947px;
+    /* background: rgba(26, 70, 104, 0.51); */
+    /* background: rgba(159, 166, 162, 0.51); */
+    background: rgba(108, 69, 1, 0.127);
+  }
+}
+
+@media (max-width: 992px) {
+  .search-sec {
+    background: #1A4668;
+    
+  }
+}
+
+.photo{
+  opacity: 0.6;
+}
 

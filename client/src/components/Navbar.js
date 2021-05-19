@@ -27,7 +27,11 @@ export default function Navbar(props) {
 
   return (
     <MDBNavbar expand="lg" className="navbar">
-      <MDBNavbarBrand href="#">Baby 3.0</MDBNavbarBrand>
+      <MDBNavbarBrand href="#">
+        <a class="navbar-brand" href="#">
+          <img src="/images/baby3.0.png" height="30px" alt="" />
+        </a>
+      </MDBNavbarBrand>
       <MDBNavbarLink href="/" class="text-white">
         Home
       </MDBNavbarLink>
@@ -46,6 +50,9 @@ export default function Navbar(props) {
         </>
       ) : (
         <>
+          <Link to="/rent" class="text-white">
+            Rent
+          </Link>
           <Link to="/signup" class="text-white">
             Signup
           </Link>

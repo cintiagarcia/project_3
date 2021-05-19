@@ -36,7 +36,7 @@ app.use(
 
 // passport configuration
 // http://www.passportjs.org/docs/configure/
-const User = require("./models/User.model");
+const User = require("./models/User.js");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");

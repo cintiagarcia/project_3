@@ -63,7 +63,7 @@ export default class Login extends Component {
 
           <div className="card-body px-lg-5 pt-0">
             <form
-              className="text-center border border-light p-5"
+              className="text-center border border-light p-4"
               action="#!"
               onSubmit={this.handleSubmit}
             >
@@ -94,7 +94,7 @@ export default class Login extends Component {
 
               <p>
                 Not a member?
-                <a href=""> Register</a>
+                <a href="/signup"> Register</a>
               </p>
 
               <p>or sign in with:</p>

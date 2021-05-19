@@ -26,9 +26,8 @@ export default class Equipments extends Component {
 
   render() {
     return (
-      
       <div>
-        <AddEquipment getData={this.getData} />
+        <AddEquipment getData={this.getData} user={this.props.user}/>
         <EquipmentsList equipments={this.state.equipments} />
       </div>
     );
