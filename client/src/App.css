@@ -116,9 +116,7 @@ a {
 @media (min-width: 992px) {
   .search-sec {
     position: relative;
-    top: -947px;
-    /* background: rgba(26, 70, 104, 0.51); */
-    /* background: rgba(159, 166, 162, 0.51); */
+    top: -959px;
     background: rgba(108, 69, 1, 0.127);
   }
 }

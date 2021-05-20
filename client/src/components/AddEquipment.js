@@ -4,10 +4,10 @@ import axios from "axios";
 export default class AddEquipment extends Component {
   state = {
     fd: undefined,
-    name: " ",
-    description: " ",
-    price: 0,
-    deposit: 0,
+    name: "",
+    description: "",
+    price: null,
+    deposit: null,
     // error: null
   };
 
@@ -49,10 +49,10 @@ export default class AddEquipment extends Component {
         .then((response) => {
           console.log(response);
           this.setState({
-            name: " ",
-            description: " ",
-            price: 0,
-            deposit: 0,
+            name: "",
+            description: "",
+            price: null,
+            deposit: null,
           });
           // update the list of equipments -> we want to trigger getData() in the Equipments
           // component
@@ -82,8 +82,8 @@ export default class AddEquipment extends Component {
 
   render() {
     return (
-      <div className="login d-flex justify-content-center p-2">
-        <div className="card w-50 h-75 p-2">
+      <div className="login d-flex justify-content-center p-3">
+        <div className="card w-50 h-75 p-1">
           <h5 className="card-header info-color white-text text-center py-4">
             <strong>Add Equipment</strong>
           </h5>
@@ -117,6 +117,7 @@ export default class AddEquipment extends Component {
                 placeholder="Description"
                 className="form-control"
                 type="text"
+        
                 name="description"
                 id="description"
                 value={this.state.description}

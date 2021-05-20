@@ -1,8 +1,11 @@
-import axios from "axios";
 import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import EditEquipment from "./EditEquipment";
 import GoogleMapReact from "google-map-react";
 import Geocode from "react-geocode";
+
+
 
 const AnyReactComponent = ({ text }) => (
   <div>
@@ -10,7 +13,7 @@ const AnyReactComponent = ({ text }) => (
   </div>
 );
 
-export default class EquipmentDetails extends Component {
+export default class SearchResults extends Component {
   state = {
     equipment: null,
     imageurl: undefined,
@@ -35,37 +38,10 @@ export default class EquipmentDetails extends Component {
     // dataRequested: false
   };
 
-  addressConversion = (address) => {
-    console.log(address);
-    Geocode.fromAddress(address).then(
-      (response) => {
-        const { lat, lng } = response.results[0].geometry.location;
-        console.log(">>>>>Conversion:");
-        console.log(lat, lng);
-        this.setState((state) => ({
-          center: {
-            lat: lat,
-            lng: lng,
-          },
-        }));
-      },
-      (error) => {
-        console.log(">>>>>BANANA:");
-        console.error(error);
-      }
-    );
-  };
-
-  toggleEditForm = () => {
-    this.setState((state) => ({
-      editForm: !state.editForm,
-    }));
-  };
-
   getData = () => {
     console.log(this.props);
     axios
-      .get(`/api/equipments/${this.props.match.params.id}`)
+      .get(`/api/equipments/filter/${this.props.match.params.city}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -93,82 +69,6 @@ export default class EquipmentDetails extends Component {
         }
       });
   };
-
-  deleteEquipment = () => {
-    axios
-      .delete(`/api/equipments/${this.state.equipment._id}`)
-      .then(() => {
-        // we want to redirect to the equipments list
-        this.props.history.push("/equipments");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  handleSubmit = (e) => {
-    const {
-      imageurl,
-      name,
-      description,
-      price,
-      deposit,
-      email,
-      street,
-      number,
-      city,
-      postalCode,
-      country,
-    } = this.state;
-    e.preventDefault();
-    axios
-      .put(`/api/equipments/${this.state.equipment._id}`, {
-        imageurl,
-        name,
-        description,
-        price,
-        deposit,
-        email,
-        street,
-        number,
-        city,
-        postalCode,
-        country,
-      })
-      .then((response) => {
-        this.setState({
-          equipment: response.data,
-          imageurl: response.data.imageurl,
-          name: response.data.name,
-          description: response.data.description,
-          price: response.data.price,
-          deposit: response.data.deposit,
-          email: response.data.email,
-          street: response.data.street,
-          number: response.data.number,
-          city: response.data.city,
-          postalCode: response.data.postalCode,
-          country: response.data.country,
-          center: {
-            lat: response.data.lat,
-            lng: response.data.lng,
-          },
-          editForm: false,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
-
-  componentDidMount() {
-    this.getData();
-  }
 
   render() {
     console.log("Coordenadas:");
@@ -210,25 +110,6 @@ export default class EquipmentDetails extends Component {
                     </a>
                   </div>
 
-                  <div class="row pt-5">
-                    <div>
-                      <button
-                        className="btn btn-info btn-block my-4"
-                        onClick={this.deleteEquipment}
-                      >
-                        Delete this Equipment
-                      </button>
-                    </div>
-                    <div>
-                      <button
-                        className="btn btn-info btn-block my-4"
-                        onClick={this.toggleEditForm}
-                      >
-                        Show Edit Form
-                      </button>
-                    </div>
-                  </div>
-
                   {this.state.editForm && (
                     <EditEquipment
                       {...this.state}
@@ -253,7 +134,7 @@ export default class EquipmentDetails extends Component {
               <AnyReactComponent
                 lat={this.state.center.lat}
                 lng={this.state.center.lng}
-                text=""      
+                text=""
               />
             </GoogleMapReact>
           </div>
@@ -262,3 +143,4 @@ export default class EquipmentDetails extends Component {
     );
   }
 }
+

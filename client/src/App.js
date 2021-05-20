@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Rent from "./components/Rent";
+import SearchResults from "./components/SearchResults";
 
 class App extends React.Component {
   state = {
@@ -75,6 +76,13 @@ class App extends React.Component {
           exact
           path="/rent"
           render={(props) => <Rent setUser={this.setUser} {...props} />}
+        />
+
+        <Route
+          exact
+          path="/search/:id"
+          render={(props) => (<SearchResults setUser={this.setUser} {...props} />
+          )}
         />
       </div>
     );
