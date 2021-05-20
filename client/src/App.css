@@ -132,3 +132,12 @@ a {
   opacity: 0.6;
 }
 
+.cards-image {
+   width: 150px;
+   height: 150px;
+}
+
+.cards-search {
+  width: 200px;
+  height: 300px;
+}

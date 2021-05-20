@@ -39,9 +39,9 @@ router.post("/", (req, res, next) => {
 });
 
 router.post("/upload", uploader.single("imageUrl"), (req, res, next) => {
-   console.log(`>>>>> file is: , ${req.file}`)
-   console.log(req.file)
-  
+  console.log(`>>>>> file is: , ${req.file}`);
+  console.log(req.file);
+
   if (!req.file) {
     next(new Error("No file uploaded!"));
     return;
@@ -69,7 +69,6 @@ router.get("/", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
   console.log(">>>>>>>> router.getID ${req.params.id}");
   Equipment.findById(req.params.id).then((equipment) => {
-    
     if (!equipment) {
       res.status(404).json(equipment);
     } else {
@@ -78,14 +77,18 @@ router.get("/:id", (req, res, next) => {
   });
 });
 
-// router.get("/filter/:address", function (req, res) {
-//   var equipment = req.params.address,
-//     console.log("estoy aqui!")
-//     console.log(req.params.address);
-// });
+router.get("/filter/:address", function (req, res) {
+  var city = req.params.address;
+  console.log("estoy aqui!");
+  console.log(req.params.address);
+  Equipment.find().then((equipments) => {
+    var e = equipments.filter((q) => {
+      return q.address.includes(city);
+    });
+    res.status(200).json(e);
+  });
 
-
-
+});
 
 router.put("/:id", (req, res, next) => {
   const {

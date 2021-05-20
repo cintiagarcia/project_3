@@ -20,6 +20,7 @@ export default class Rent extends Component {
     e.preventDefault();
     const { city } = this.state;
     console.log("llamadaaaa");
+    console.log(city);
     this.props.history.push(`/search/${city}`);
   };
 
