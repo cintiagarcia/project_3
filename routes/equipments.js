@@ -78,11 +78,11 @@ router.get("/:id", (req, res, next) => {
   });
 });
 
-router.get("/filter/:address", function (req, res) {
-  var equipment = req.params.address,
-    console.log("estoy aqui!")
-    console.log(req.params.address);
-});
+// router.get("/filter/:address", function (req, res) {
+//   var equipment = req.params.address,
+//     console.log("estoy aqui!")
+//     console.log(req.params.address);
+// });
 
 
 
