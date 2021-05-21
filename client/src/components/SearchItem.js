@@ -5,7 +5,7 @@ export default function SearchItem(props) {
   console.log(props);
 
   return (
-    <div class="card cards-search col-sd m-2">
+    <div class="card cards-search align-items-center col-sd m-2">
       <img
         class="card-img-top cards-image "
         src={props.equipment.imageurl}
