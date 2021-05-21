@@ -38,6 +38,9 @@ export default function Navbar(props) {
 
       {props.user ? (
         <>
+          <Link to="/rent" class="text-white">
+            Rent
+          </Link>
           <Link to="/equipments" class="text-white">
             Add baby's equipment
           </Link>
